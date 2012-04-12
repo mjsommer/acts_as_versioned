@@ -338,7 +338,10 @@ module ActiveRecord #:nodoc:
             if orig_model.is_a?(self.class.versioned_class)
               new_model[new_model.class.inheritance_column] = orig_model[self.class.versioned_inheritance_column]
             elsif new_model.is_a?(self.class.versioned_class)
-              new_model[self.class.versioned_inheritance_column] = orig_model[orig_model.class.inheritance_column]
+              sym = self.class.versioned_inheritance_column.to_sym
+              metaclass = class << new_model; self; end
+              metaclass.send :attr_accessor, sym
+              new_model.send("#{sym}=", orig_model[orig_model.class.inheritance_column]) if orig_model[orig_model.class.inheritance_column]
             end
           end
 
