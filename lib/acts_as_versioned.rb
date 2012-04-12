@@ -338,7 +338,7 @@ module ActiveRecord #:nodoc:
             if orig_model.is_a?(self.class.versioned_class)
               new_model[new_model.class.inheritance_column] = orig_model[self.class.versioned_inheritance_column]
             elsif new_model.is_a?(self.class.versioned_class)
-              new_model.send("#{self.class.versioned_inheritance_column}=", orig_model[orig_model.class.inheritance_column])
+              new_model[self.class.versioned_inheritance_column] = orig_model[orig_model.class.inheritance_column]
             end
           end
 
