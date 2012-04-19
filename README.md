@@ -23,7 +23,7 @@ By default acts_as_versioned is unobtrusive. You will need to explicitly state w
       #...
     end
     
-The last step in preparing this model to be versioned is to create a migration.
+Next we need to create a migration to setup our versioning tables:
 
     bundle exec rails generate migration AddVersioningToMyModel
     
