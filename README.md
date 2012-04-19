@@ -54,7 +54,7 @@ To determine what the current version number for a model is:
 
     model.version
 
-The `version` attribute is available for both the actual model, and also any revisions of a model. Thusly, the following is value:
+The `version` attribute is available for both the actual model, and also any revisions of a model. Thusly, the following is valid:
 
     model.versions.last.version
 
