@@ -332,17 +332,24 @@ module ActiveRecord #:nodoc:
           # Clones a model.  Used when saving a new version or reverting a model's version.
           def clone_versioned_model(orig_model, new_model)
             self.class.versioned_columns.each do |col|
-              new_model[col.name] = orig_model.send(col.name) if orig_model.has_attribute?(col.name)
+              next unless orig_model.has_attribute?(col.name)
+              define_method(new_model, col.name.to_sym)
+              new_model.send("#{col.name.to_sym}=", orig_model.send(col.name))
             end
 
             if orig_model.is_a?(self.class.versioned_class)
               new_model[new_model.class.inheritance_column] = orig_model[self.class.versioned_inheritance_column]
             elsif new_model.is_a?(self.class.versioned_class)
               sym = self.class.versioned_inheritance_column.to_sym
-              metaclass = class << new_model; self; end
-              metaclass.send :attr_accessor, sym
+              define_method new_model, sym
               new_model.send("#{sym}=", orig_model[orig_model.class.inheritance_column]) if orig_model[orig_model.class.inheritance_column]
             end
+          end
+          
+          def define_method(object, method)
+            return if object.methods.include? method
+            metaclass = class << object; self; end
+            metaclass.send :attr_accessor, method
           end
 
           # Checks whether a new version shall be saved or not.  Calls <tt>version_condition_met?</tt> and <tt>changed?</tt>.
