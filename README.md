@@ -1,24 +1,15 @@
-= acts_as_versioned
+## About ##
+=====
 
-This library adds simple versioning to an ActiveRecord module.  ActiveRecord is required.
+acts_as_versioned is a gem for Rails 3.1 & 3.2 to enable easy versioning of models. As a versioned model is updated revisions are kept in a seperate table, providing a record of what changed.
 
-== Resources
+## Getting Started ##
+=====
 
-Install
+In your Gemfile simply include:
+    gem 'acts_as_versioned', :git => 'https://github.com/jwhitehorn/acts_as_versioned.git'
+    
+## Usage ##
+=====
 
-* gem install acts_as_versioned
-
-<3 GitHub
-
-* http://github.com/technoweenie/acts_as_versioned
-
-Gemcutter FTW
-
-* http://gemcutter.org/gems/acts_as_versioned
-
-Subversion
-
-* http://svn.github.com/technoweenie/acts_as_versioned.git
-
-Special thanks to Dreamer on ##rubyonrails for help in early testing.  His ServerSideWiki (http://serversidewiki.com) 
-was the first project to use acts_as_versioned <em>in the wild</em>.
+TODO
