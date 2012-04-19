@@ -49,7 +49,7 @@ And you're finished! Without any addition work, `MyModel` is being versioned.
 
 Recording a history of changes to a model is only useful if you can do something with that data. With acts_as_versioned there are several ways you can interact with a model's revisions.
 
-###### Version Number ######
+##### Version Number #####
 To determine what the current version number for a model is:
 
     model.version
@@ -58,7 +58,7 @@ The `version` attribute is available for both the actual model, and also any rev
 
     model.versions.last.version
 
-###### Revisions List ######
+##### Revisions List #####
 As alluded to above, you can get an array of revisions of a model via the `versions` attribute:
 
     model.versions
@@ -67,12 +67,12 @@ The returned objects are of a type `MyModel::Version` where `MyModel` is the mod
 
     model.versions.last.name
 
-###### Reverting to a Revision ######
+##### Reverting to a Revision #####
 To revert a model to an older revision, simply call `revert_to` with the version number you desire to rever to:
 
     model.revert_to(version_number)
 
-###### Saving Without Revisions ######
+##### Saving Without Revisions #####
 Occasionally you might need to save a model without necessary creating revisions. To do so, use the `save_without_revision` method:
     
     model.save_without_revision
