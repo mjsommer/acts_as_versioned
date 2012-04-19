@@ -10,7 +10,42 @@ In your Gemfile simply include:
 
     gem 'acts_as_versioned', :git => 'https://github.com/jwhitehorn/acts_as_versioned.git'
     
+The next time you run `bundle install` you'll be all set to start using `acts_as_versioned`.  
+
 ## Usage ##
 =====
 
+#### Versioning a Model ####
+By default acts_as_versioned is unobtrusive. You will need to explicitly state which models to version. To do so, add the line `acts_as_versioned` to your model, like so:
+
+    class MyModel < ActiveRecord::Base
+      acts_as_versioned
+      #...
+    end
+    
+The last step in preparing this model to be versioned is to create a migration.
+
+    bundle exec rails generate migration AddVersioningToMyModel
+    
+Once that is completed, edit the generated migration. acts_as_versioned patches your model to add a `create_versioned_table` and `drop_versioned_table` method. A migration for `MyModel` (assuming MyModel already existed) might look like:
+
+    class AddVersioningToMyModel < ActiveRecord::Migration
+      def self.up
+        MyModel.create_versioned_table
+      end
+
+      def self.down
+        MyModel.drop_versioned_table
+      end
+    end
+
+Execute your migration:
+    
+    bundle exec rake db:migrate
+    
+And your finished! Without any addition work `MyModel` being versioned.
+
+#### Revisions ####
 TODO
+
+#### Migrations ####
