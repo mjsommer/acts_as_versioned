@@ -7,6 +7,7 @@ acts_as_versioned is a gem for Rails 3.1 & 3.2 to enable easy versioning of mode
 =====
 
 In your Gemfile simply include:
+
     gem 'acts_as_versioned', :git => 'https://github.com/jwhitehorn/acts_as_versioned.git'
     
 ## Usage ##
