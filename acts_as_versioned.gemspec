@@ -54,7 +54,7 @@ Gem::Specification.new do |s|
     CHANGELOG
     Gemfile
     MIT-LICENSE
-    README
+    README.md
     RUNNING_UNIT_TESTS
     Rakefile
     acts_as_versioned.gemspec
