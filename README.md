@@ -43,7 +43,7 @@ Execute your migration:
     
     bundle exec rake db:migrate
     
-And your finished! Without any addition work `MyModel` being versioned.
+And you're finished! Without any addition work `MyModel` being versioned.
 
 #### Revisions ####
 TODO
