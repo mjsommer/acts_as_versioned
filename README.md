@@ -10,7 +10,7 @@ In your Gemfile simply include:
 
     gem 'acts_as_versioned', :git => 'https://github.com/jwhitehorn/acts_as_versioned.git'
     
-The next time you run `bundle install` you'll be all set to start using `acts_as_versioned`.  
+The next time you run `bundle install` you'll be all set to start using acts_as_versioned.  
 
 ## Usage ##
 =====
