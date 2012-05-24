@@ -83,7 +83,7 @@ Adding a field to your model does not automatically add it to the versioning tab
 
     class AddNewFieldToMyModel < ActiveRecord::Migration
       def change
-        add_column :my_model, :new_field_, :string
+        add_column :my_models, :new_field_, :string
         add_column :my_model_versions, :new_field_, :string
       end
     end
