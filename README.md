@@ -87,3 +87,24 @@ Adding a field to your model does not automatically add it to the versioning tab
         add_column :my_model_versions, :new_field_, :string
       end
     end
+
+#### Version Class ####
+As has been stated, the versioned data is stored seperately from the main class. This also implies that `model.versions` returns an area of object of a class _other_ than `MyModel` (where `model` is an instance of `MyModel`, keeping with our working example). The instances returned are actually of type `MyModel::Version`. With this, comes the fact that any methods, associations, etc. defined on `MyModel` are not present on `MyModel::Version`.
+
+While this sounds obvious, it can some times be unexpected. Especially when acts_as_versioned make it so easy to grab historical records from a live record. A common scenario where this can come up is associations.
+
+Say `MyModel` belongs to `TheMan`. Also, assume that you want to find out where (in the past) a particular instance of `MyModel` was updated in regards to it's association to `TheMan`. You could write that as:  
+    
+    model.versions.each.keep_if { |m| m.the_man != current_man }.first
+    
+However, this will not work. This is because `MyModel::Version` does _not_ belong to `TheMan`. You could compare ids here, or you could patch `MyModel::Version` to belong to `TheMan` like:
+
+    class MyModel
+      acts_as_versioned
+      belongs_to :the_men
+      #some stuff
+      
+      class Version
+        belongs_to :the_men
+      end
+    end
