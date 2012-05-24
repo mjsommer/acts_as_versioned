@@ -81,7 +81,7 @@ Occasionally you might need to save a model without necessary creating revisions
 #### Migrations ####
 Adding a field to your model does not automatically add it to the versioning table. So, when you add new fields, be sure to add them to both:
 
-    class AddGeoFieldsToAreaVersion < ActiveRecord::Migration
+    class AddNewFieldToModel < ActiveRecord::Migration
       def change
         add_column :model, :new_field_, :string
         add_column :model_versions, :new_field_, :string
