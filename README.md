@@ -95,7 +95,7 @@ While this sounds obvious, it can some times be unexpected. Especially when acts
 
 Say `MyModel` belongs to `TheMan`. Also, assume that you want to find out where (in the past) a particular instance of `MyModel` was updated in regards to it's association to `TheMan`. You could write that as:  
     
-    model.versions.keep_if { |m| m.the_man != current_man }.first
+    model.versions.keep_if { |m| m.the_man != current_man }.last
     
 However, this will not work. This is because `MyModel::Version` does _not_ belong to `TheMan`. You could compare ids here, or you could patch `MyModel::Version` to belong to `TheMan` like:
 
