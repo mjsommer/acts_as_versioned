@@ -176,7 +176,7 @@ module ActiveRecord #:nodoc:
         self.version_sequence_name        = options[:sequence_name]
         self.max_version_limit            = options[:limit].to_i
         self.version_condition            = options[:if] || true
-        self.non_versioned_columns        = [self.primary_key, inheritance_column, self.version_column, 'lock_version', versioned_inheritance_column] + options[:except].to_a.map(&:to_s)
+        self.non_versioned_columns        = [self.primary_key, inheritance_column, self.version_column, 'lock_version', versioned_inheritance_column] + [options[:except]].flatten.map(&:to_s)
         self.version_association_options  = {
                                                     :class_name  => "#{self.to_s}::#{versioned_class_name}",
                                                     :foreign_key => versioned_foreign_key,
