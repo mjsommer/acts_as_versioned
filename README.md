@@ -45,7 +45,7 @@ Execute your migration:
     
 And you're finished! Without any addition work, `MyModel` is being versioned.
 
-#### Excluding attributes from visioning ####
+#### Excluding attributes from versioning  ####
 
 Sometime you want to exclude an attribute of a model from being versioned. That can be accomplished with the `:except` paramter to `acts_as_versioned`:
 
