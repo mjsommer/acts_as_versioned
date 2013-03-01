@@ -45,6 +45,16 @@ Execute your migration:
     
 And you're finished! Without any addition work, `MyModel` is being versioned.
 
+#### Excluding attributes from visioning ####
+
+Sometime you want to exclude an attribute of a model from being versioned. That can be accomplished with the `:except` paramter to `acts_as_versioned`:
+
+    class MyMode < ActiveRecord::Base
+      acts_as_versioned :except => :some_attr_i_dont_want_versioned
+      
+    end
+
+
 #### Revisions ####
 
 Recording a history of changes to a model is only useful if you can do something with that data. With acts_as_versioned there are several ways you can interact with a model's revisions.
