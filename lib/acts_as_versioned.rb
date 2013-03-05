@@ -325,7 +325,8 @@ module ActiveRecord #:nodoc:
         end
 
         def altered?
-          track_altered_attributes ? (version_if_changed - changed).length < version_if_changed.length : changed?
+          changed.map { |c| versioned_columns.contains?(c) }.any
+          #track_altered_attributes ? (version_if_changed - changed).length < version_if_changed.length : changed?
         end
 
         # Clones a model.  Used when saving a new version or reverting a model's version.
