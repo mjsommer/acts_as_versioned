@@ -325,7 +325,7 @@ module ActiveRecord #:nodoc:
         end
 
         def altered?
-          changed.map { |c| versioned_columns.contains?(c) }.any
+          changed.map { |c| versioned_columns.include?(c) }.any
           #track_altered_attributes ? (version_if_changed - changed).length < version_if_changed.length : changed?
         end
 
