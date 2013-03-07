@@ -166,7 +166,7 @@ module ActiveRecord #:nodoc:
 
         cattr_accessor :versioned_class_name, :versioned_foreign_key, :versioned_table_name, :versioned_inheritance_column,
                        :version_column, :max_version_limit, :track_altered_attributes, :version_condition, :version_sequence_name, :non_versioned_columns,
-                       :version_association_options, :version_if_changed
+                       :version_association_options, :version_if_changed, :version_except_columns
 
         self.versioned_class_name         = options[:class_name] || "Version"
         self.versioned_foreign_key        = options[:foreign_key] || self.to_s.foreign_key
@@ -176,7 +176,8 @@ module ActiveRecord #:nodoc:
         self.version_sequence_name        = options[:sequence_name]
         self.max_version_limit            = options[:limit].to_i
         self.version_condition            = options[:if] || true
-        self.non_versioned_columns        = [self.primary_key, inheritance_column, self.version_column, 'lock_version', versioned_inheritance_column] + [options[:except]].flatten.map(&:to_s)
+        self.version_except_columns       = [options[:except]].flatten.map(&:to_s)  #these columns are kept in _versioned, but changing them does not excplitly cause a version change
+        self.non_versioned_columns        = [self.primary_key, inheritance_column, self.version_column, 'lock_version', versioned_inheritance_column] #these columns are excluded from _versions, and changing them does not cause a version change
         self.version_association_options  = {
                                                     :class_name  => "#{self.to_s}::#{versioned_class_name}",
                                                     :foreign_key => versioned_foreign_key,
@@ -325,7 +326,7 @@ module ActiveRecord #:nodoc:
         end
 
         def altered?
-          changed.map { |c| self.class.versioned_columns.include?(c) }.any?
+          changed.map { |c| self.class.versioned_columns.include?(c) & !self.class.version_except_columns.include?(c) }.any?
         end
 
         # Clones a model.  Used when saving a new version or reverting a model's version.
