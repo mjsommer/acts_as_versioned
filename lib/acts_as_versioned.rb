@@ -326,7 +326,7 @@ module ActiveRecord #:nodoc:
         end
 
         def altered?
-          changed.map { |c| self.class.versioned_columns.include?(c) & !self.class.version_except_columns.include?(c) }.any?
+          changed.map { |c| self.class.versioned_columns.map(&:name).include?(c) & !self.class.version_except_columns.include?(c) }.any?
         end
 
         # Clones a model.  Used when saving a new version or reverting a model's version.
