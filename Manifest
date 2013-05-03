@@ -1,0 +1,9 @@
+Gemfile
+Gemfile.lock
+MIT-LICENSE
+Manifest
+README.md
+Rakefile
+acts_as_versioned.gemspec
+init.rb
+lib/acts_as_versioned.rb
