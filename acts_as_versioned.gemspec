@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = "Active Record model versioning"
   s.email = "jason.whitehorn@gmail.com"
   s.extra_rdoc_files = ["README.md", "lib/acts_as_versioned.rb"]
-  s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "Rakefile", "acts_as_versioned.gemspec", "init.rb", "lib/acts_as_versioned.rb"]
+  s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "RUNNING_UNIT_TESTS", "Rakefile", "acts_as_versioned.gemspec", "acts_as_versioned_plugin.sqlite3.db", "init.rb", "lib/acts_as_versioned.rb"]
   s.homepage = "http://github.com/jwhitehorn/acts_as_versioned"
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Acts_as_versioned", "--main", "README.md"]
   s.require_paths = ["lib"]
