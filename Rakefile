@@ -7,7 +7,8 @@ Echoe.new('acts_as_versioned', '3.2.1') do |p|
   p.url             = "http://github.com/jwhitehorn/acts_as_versioned"  
   p.author          = "Jason Whitehorn"  
   p.email           = "jason.whitehorn@gmail.com"  
-  p.ignore_pattern  = ["test/*", "test/**/*", "RUNNING_UNIT_TESTS"]  
+  p.ignore_pattern  = ["test/*.rb", "test/**/*", "RUNNING_UNIT_TESTS", "*.db"]
+  p.test_pattern    = ''
   p.dependencies = ['activerecord']  
 end  
   

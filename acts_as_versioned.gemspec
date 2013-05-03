@@ -10,14 +10,13 @@ Gem::Specification.new do |s|
   s.description = "Active Record model versioning"
   s.email = "jason.whitehorn@gmail.com"
   s.extra_rdoc_files = ["README.md", "lib/acts_as_versioned.rb"]
-  s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "Rakefile", "acts_as_versioned.gemspec", "init.rb", "lib/acts_as_versioned.rb", "test/migration_test.rb", "test/versioned_test.rb"]
+  s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "Rakefile", "acts_as_versioned.gemspec", "init.rb", "lib/acts_as_versioned.rb"]
   s.homepage = "http://github.com/jwhitehorn/acts_as_versioned"
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Acts_as_versioned", "--main", "README.md"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "acts_as_versioned"
   s.rubygems_version = "1.8.25"
   s.summary = "Active Record model versioning"
-  s.test_files = ["test/migration_test.rb", "test/versioned_test.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
