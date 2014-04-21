@@ -8,7 +8,7 @@ acts_as_versioned is a gem for Rails 3.1, 3.2 & 4 to enable easy versioning of m
 
 In your Gemfile simply include:
 
-    gem 'acts_as_versioned', :git => 'https://github.com/mjsommer/acts_as_versioned.git'
+    gem 'acts_as_versioned_jw', '~> 3.2.2'
     
 The next time you run `bundle install` you'll be all set to start using acts_as_versioned.  
 
