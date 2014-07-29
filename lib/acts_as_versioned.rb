@@ -273,7 +273,7 @@ module ActiveRecord #:nodoc:
         def save_version
           if @saving_version
             @saving_version = nil
-            rev = self.class.versioned_class.new
+            rev = self.class.versioned_class.create
             clone_versioned_model(self, rev)
             rev.send("#{self.class.version_column}=", send(self.class.version_column))
             rev.send("#{self.class.versioned_foreign_key}=", id)
