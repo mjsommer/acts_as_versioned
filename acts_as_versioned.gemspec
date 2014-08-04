@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = "acts_as_versioned"
-  s.version = "3.2.2"
+  s.version = "3.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jason Whitehorn"]
-  s.date = "2013-05-03"
+  s.authors = ["Sommer Systems, LLC"]
+  s.date = "2014-08-04"
   s.description = "Active Record model versioning"
-  s.email = "jason.whitehorn@gmail.com"
+  s.email = "martin@sommer.net"
   s.extra_rdoc_files = ["README.md", "lib/acts_as_versioned.rb"]
   s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "RUNNING_UNIT_TESTS", "Rakefile", "acts_as_versioned.gemspec", "init.rb", "lib/acts_as_versioned.rb"]
   s.homepage = "http://github.com/jwhitehorn/acts_as_versioned"
