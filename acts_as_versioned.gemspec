@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "acts_as_versioned"
-  s.version = "3.3.0"
+  s.version = "3.3.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Sommer Systems, LLC"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = "martin@sommer.net"
   s.extra_rdoc_files = ["README.md", "lib/acts_as_versioned.rb"]
   s.files = ["Gemfile", "Gemfile.lock", "MIT-LICENSE", "Manifest", "README.md", "RUNNING_UNIT_TESTS", "Rakefile", "acts_as_versioned.gemspec", "init.rb", "lib/acts_as_versioned.rb"]
-  s.homepage = "http://github.com/jwhitehorn/acts_as_versioned"
+  s.homepage = "http://github.com/mjsommer/acts_as_versioned"
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Acts_as_versioned", "--main", "README.md"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "acts_as_versioned"
