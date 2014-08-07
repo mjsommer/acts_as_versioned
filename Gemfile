@@ -1,7 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-group :development do
-  gem 'rails',        '~> 3.1.0'
-  gem 'sqlite3'
-  gem 'echoe'
-end
+# Specify your gem's dependencies in db_acts_as_versioned.gemspec
+gemspec
