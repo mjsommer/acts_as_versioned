@@ -3,6 +3,15 @@
 
 acts_as_versioned is a gem for Rails 3.1, 3.2 & 4 to enable easy versioning of models. As a versioned model is updated revisions are kept in a seperate table, providing a record of what changed.
 
+## Update:
+
+The forked acts_as_versioned code systematically deleted records in the version table, when the associated record was deleted in the parent table. This seemed both illogical to me, and created "gaps" in the data history. Given this, starting in version 3.5.0, I made the feature optional, with the new default behavior to "save deleted records in the version table".
+
+For anyone wanting to retain the original functionality (deleting history of deleted parent records), add the new "dependent_version_association: option:
+
+    acts_as_versioned :dependent_version_association => :delete_all
+
+
 ## Getting Started ##
 =====
 
