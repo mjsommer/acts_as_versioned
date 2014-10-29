@@ -17,7 +17,7 @@ For anyone wanting to retain the original functionality (deleting history of del
 
 In your Gemfile simply include:
 
-    gem 'db_acts_as_versioned', '~> 3.4.1'
+    gem 'db_acts_as_versioned', '~> 3.5.0'
 
 The next time you run `bundle install` you'll be all set to start using acts_as_versioned.
 
