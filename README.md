@@ -1,5 +1,4 @@
 ## DbActsAsVersioned ##
-=====
 
 acts_as_versioned is a gem for Rails 3.1, 3.2 & 4 to enable easy versioning of models. As a versioned model is updated revisions are kept in a seperate table, providing a record of what changed.
 
@@ -13,7 +12,6 @@ For anyone wanting to retain the original functionality (deleting history of del
 
 
 ## Getting Started ##
-=====
 
 In your Gemfile simply include:
 
@@ -22,7 +20,6 @@ In your Gemfile simply include:
 The next time you run `bundle install` you'll be all set to start using acts_as_versioned.
 
 ## Usage ##
-=====
 
 #### Versioning a Model ####
 By default acts_as_versioned is unobtrusive. You will need to explicitly state which models to version. To do so, add the line `acts_as_versioned` to your model, like so:
