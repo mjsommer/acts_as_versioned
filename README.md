@@ -53,7 +53,7 @@ And you're finished! Without any addition work, `MyModel` is being versioned.
 
 #### Excluding attributes from versioning  ####
 
-Sometime you want to exclude an attribute of a model from being versioned. That can be accomplished with the `:except` paramter to `acts_as_versioned`:
+Sometime you want to exclude an attribute of a model from being versioned. That can be accomplished with the `:except` parameter to `acts_as_versioned`:
 
     class MyMode < ActiveRecord::Base
       acts_as_versioned :except => :some_attr_i_dont_want_versioned
