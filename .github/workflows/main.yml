@@ -1,0 +1,48 @@
+name: Tests
+
+on: [ push ]
+
+jobs:
+  ci:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          -
+            name: "Default"
+            ruby: 2.7.4
+            gemfile: Gemfile
+
+    env:
+      BUNDLE_GEMFILE: "${{ matrix.gemfile }}"
+      BUNDLE_WITHOUT: production
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+
+    steps:
+      -
+        name: Checkout Source Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '1'
+      -
+        name: Install ruby ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      -
+        name: Set Env 2.2.25
+        run: |
+          gem update --system
+          gem install bundler:2.2.25
+      -
+        name: Bundle Install ${{ matrix.gemfile }}
+        run: |
+          bundle config set --local deployment 'true'
+          bundle install
+      -
+        name: Run test suite
+        run: bundle exec rake
