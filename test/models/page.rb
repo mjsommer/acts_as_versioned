@@ -1,8 +1,4 @@
 class Page < ActiveRecord::Base
-  belongs_to :author
-  has_many   :authors, -> { order "name" },  :through => :versions
-  belongs_to :revisor,  :class_name => 'Author'
-  has_many   :revisors, -> { order "name" }, :class_name => 'Author', :through => :versions
   acts_as_versioned :if => :feeling_good? do
     def self.included(base)
       base.cattr_accessor :feeling_good
@@ -15,6 +11,12 @@ class Page < ActiveRecord::Base
       @@feeling_good == true
     end
   end
+
+  belongs_to :author
+  has_many   :authors, -> { order "name" },  :through => :versions
+
+  belongs_to :revisor,  :class_name => 'Author'
+  has_many   :revisors, -> { order "name" }, :class_name => 'Author', :through => :versions
 end
 
 module LockedPageExtension
