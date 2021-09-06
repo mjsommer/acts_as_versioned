@@ -20,7 +20,7 @@ class VersionedTest < ActiveSupport::TestCase
     p.save_without_revision
 
     p.without_revision do
-      p.update_attributes :title => 'changed'
+      p.update :title => 'changed'
     end
 
     assert_equal old_versions, p.versions.count
@@ -148,11 +148,11 @@ class VersionedTest < ActiveSupport::TestCase
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update_attributes(:title => 'new title')
+    p.update(:title => 'new title')
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update_attributes(:title => 'a title')
+    p.update(:title => 'a title')
     assert_equal 2, p.version
     assert_equal 2, p.versions.count
 
@@ -169,11 +169,11 @@ class VersionedTest < ActiveSupport::TestCase
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update_attributes(:title => 'a title')
+    p.update(:title => 'a title')
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update_attributes(:title => 'b title')
+    p.update(:title => 'b title')
     assert_equal 2, p.version
     assert_equal 2, p.versions.count
 
@@ -195,8 +195,8 @@ class VersionedTest < ActiveSupport::TestCase
 
   # def test_version_max_limit
   #   p = LockedPage.create! :title => "title"
-  #   p.update_attributes(:title => "title1")
-  #   p.update_attributes(:title => "title2")
+  #   p.update(:title => "title1")
+  #   p.update(:title => "title2")
   #   5.times do |i|
   #     p.title = "title#{i}"
   #     p.save
