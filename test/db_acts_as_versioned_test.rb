@@ -75,25 +75,25 @@ class VersionedTest < ActiveSupport::TestCase
   #   assert_instance_of LockedPage.versioned_class, p.versions.first
   # end
 
-  def test_rollback_with_version_number_with_options
-    p = locked_pages(:welcome)
-    assert_equal 'Welcome to the weblog', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
-
-    assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 23"
-    assert_equal 'Welcome to the weblg', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
-  end
-
-  def test_rollback_with_version_class_with_options
-    p = locked_pages(:welcome)
-    assert_equal 'Welcome to the weblog', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
-
-    assert p.revert_to!(p.versions.first), "Couldn't revert to 1"
-    assert_equal 'Welcome to the weblg', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
-  end
+  # def test_rollback_with_version_number_with_options
+  #   p = locked_pages(:welcome)
+  #   assert_equal 'Welcome to the weblog', p.title
+  #   assert_equal 'LockedPage', p.versions.first.version_type
+  #
+  #   assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 23"
+  #   assert_equal 'Welcome to the weblg', p.title
+  #   assert_equal 'LockedPage', p.versions.first.version_type
+  # end
+  #
+  # def test_rollback_with_version_class_with_options
+  #   p = locked_pages(:welcome)
+  #   assert_equal 'Welcome to the weblog', p.title
+  #   assert_equal 'LockedPage', p.versions.first.version_type
+  #
+  #   assert p.revert_to!(p.versions.first), "Couldn't revert to 1"
+  #   assert_equal 'Welcome to the weblg', p.title
+  #   assert_equal 'LockedPage', p.versions.first.version_type
+  # end
 
   # def test_saves_versioned_copy_with_sti
   #   p = SpecialLockedPage.create! :title => 'first title'
@@ -103,14 +103,14 @@ class VersionedTest < ActiveSupport::TestCase
   #   assert_equal 'SpecialLockedPage', p.versions.first.version_type
   # end
 
-  def test_rollback_with_version_number_with_sti
-    p = locked_pages(:thinking)
-    assert_equal 'So I was thinking', p.title
-
-    assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 1"
-    assert_equal 'So I was thinking!!!', p.title
-    assert_equal 'SpecialLockedPage', p.versions.first.version_type
-  end
+  # def test_rollback_with_version_number_with_sti
+  #   p = locked_pages(:thinking)
+  #   assert_equal 'So I was thinking', p.title
+  #
+  #   assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 1"
+  #   assert_equal 'So I was thinking!!!', p.title
+  #   assert_equal 'SpecialLockedPage', p.versions.first.version_type
+  # end
 
   # def test_lock_version_works_with_versioning
   #   p = locked_pages(:thinking)
