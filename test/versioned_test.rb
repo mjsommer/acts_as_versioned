@@ -1,30 +1,14 @@
 require File.expand_path '../test_helper.rb',__FILE__
 
-# require_relative 'abstract_unit'
-# require File.join(File.dirname(__FILE__), 'abstract_unit')
 require_relative 'fixtures/page'
 require_relative 'fixtures/widget'
 
-# class VersionedTest < Test::Unit::TestCase
 class VersionedTest < ActiveSupport::TestCase
-
-  puts("BAAAAAAAAAAAAR!!!!!!!!")
-
-  # ActiveRecord::FixtureSet.create_fixtures('test/fixtures', %i[pages page_versions locked_pages locked_pages_revisions authors landmarks landmark_versions])
-  # ActiveRecord::FixtureSet.set_fixture_class :page_versions => Page::Version
 
   fixtures :pages, :page_versions, :locked_pages, :locked_pages_revisions, :authors, :landmarks, :landmark_versions
   set_fixture_class :page_versions => Page::Version
 
-  puts("BAAAAAAAAAAAAZZZZZZ!!!!!!!!")
-
-  test "the truth" do
-    puts("BAAAAAAAAAAAAR!!!!!!!!")
-    assert true
-  end
-
-  # def test_saves_versioned_copy
-  test "test_saves_versioned_copy" do
+  def test_saves_versioned_copy
     p = Page.create! :title => 'first title', :body => 'first body'
     assert !p.new_record?
     assert_equal 1, p.versions.size
