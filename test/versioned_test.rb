@@ -1,7 +1,8 @@
 require File.expand_path '../test_helper.rb',__FILE__
 
-require_relative 'fixtures/page'
-require_relative 'fixtures/widget'
+require_relative 'models/page'
+require_relative 'models/widget'
+require_relative 'models/landmark'
 
 class VersionedTest < ActiveSupport::TestCase
 
