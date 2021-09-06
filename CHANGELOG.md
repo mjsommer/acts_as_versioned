@@ -1,6 +1,8 @@
-## [3.6.0] - Sep 6, 2021
+## [4.0.0] - Sep 6, 2021
 
 - Re add tests
+- CI upon Rails 4.2 / 5.2 / 6.1
+- CI upon Ruby 2.7.4 / 3.0.2
 - Remove sequence_name
 
 ## [3.5.0]  - Oct 29, 2014
