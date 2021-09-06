@@ -1,82 +1,82 @@
-ActiveRecord::Schema.define(:version => 0) do
-  create_table :pages, :force => true do |t|
-    t.column :version, :integer
-    t.column :title, :string, :limit => 255
-    t.column :body, :text
-    t.column :created_on, :datetime
-    t.column :updated_on, :datetime
-    t.column :author_id, :integer
-    t.column :revisor_id, :integer
+ActiveRecord::Schema.define do
+  create_table :pages do |t|
+    t.integer :version
+    t.string :title
+    t.text :body
+    t.datetime :created_on
+    t.datetime :updated_on
+    t.integer :author_id
+    t.integer :revisor_id
   end
 
-  create_table :page_versions, :force => true do |t|
-    t.column :page_id, :integer
-    t.column :version, :integer
-    t.column :title, :string, :limit => 255
-    t.column :body, :text
-    t.column :created_on, :datetime
-    t.column :updated_on, :datetime
-    t.column :author_id, :integer
-    t.column :revisor_id, :integer
-  end
-  
-  add_index :page_versions, [:page_id, :version], :unique => true
-  
-  create_table :authors, :force => true do |t|
-    t.column :page_id, :integer
-    t.column :name, :string
-  end
-  
-  create_table :locked_pages, :force => true do |t|
-    t.column :lock_version, :integer
-    t.column :title, :string, :limit => 255
-    t.column :body, :text
-    t.column :type, :string, :limit => 255
+  create_table :page_versions do |t|
+    t.integer :page_id
+    t.integer :version
+    t.string :title
+    t.text :body
+    t.datetime :created_on
+    t.datetime :updated_on
+    t.integer :author_id
+    t.integer :revisor_id
   end
 
-  create_table :locked_pages_revisions, :force => true do |t|
-    t.column :page_id, :integer
-    t.column :lock_version, :integer
-    t.column :title, :string, :limit => 255
-    t.column :body, :text
-    t.column :version_type, :string, :limit => 255
-    t.column :updated_at, :datetime
-  end
-  
-  add_index :locked_pages_revisions, [:page_id, :lock_version], :unique => true
+  # add_index :page_versions, [:page_id, :version], :unique => true
 
-  create_table :widgets, :force => true do |t|
-    t.column :name, :string, :limit => 50
-    t.column :foo, :string
-    t.column :version, :integer
+  create_table :authors do |t|
+    t.integer :page_id
+    t.string :name
+  end
+
+  create_table :locked_pages do |t|
+    t.integer :lock_version
+    t.string :title
+    t.text :body
+    t.string :type
+  end
+
+  create_table :locked_pages_revisions do |t|
+    t.integer :page_id
+    t.integer :lock_version
+    t.string :title
+    t.text :body
+    t.string :version_type
     t.column :updated_at, :datetime
   end
 
-  create_table :widget_versions, :force => true do |t|
-    t.column :widget_id, :integer
-    t.column :name, :string, :limit => 50
-    t.column :version, :integer
-    t.column :updated_at, :datetime
-  end
-  
-  add_index :widget_versions, [:widget_id, :version], :unique => true
-  
-  create_table :landmarks, :force => true do |t|
-    t.column :name, :string
-    t.column :latitude, :float
-    t.column :longitude, :float
-    t.column :doesnt_trigger_version,:string
-    t.column :version, :integer
+  # add_index :locked_pages_revisions, [:page_id, :lock_version], :unique => true
+
+  create_table :widgets do |t|
+    t.string :name
+    t.string :foo
+    t.integer :version
+    t.datetime :updated_at
   end
 
-  create_table :landmark_versions, :force => true do |t|
-    t.column :landmark_id, :integer
-    t.column :name, :string
-    t.column :latitude, :float
-    t.column :longitude, :float
-    t.column :doesnt_trigger_version,:string
-    t.column :version, :integer
+  create_table :widget_versions do |t|
+    t.integer :widget_id
+    t.string :name
+    t.integer :version
+    t.datetime :updated_at
   end
-  
-  add_index :landmark_versions, [:landmark_id, :version], :unique => true
+
+  # add_index :widget_versions, [:widget_id, :version], :unique => true
+
+  create_table :landmarks do |t|
+    t.string :name
+    t.string :latitude
+    t.string :longitude
+    t.string :doesnt_trigger_version
+    t.integer :version
+  end
+
+  create_table :landmark_versions do |t|
+    t.integer :landmark_id
+    t.string :name
+    t.float :latitude
+    t.float :longitude
+    t.string :doesnt_trigger_version
+    t.integer :version
+  end
+
+  # add_index :landmark_versions, [:landmark_id, :version], :unique => true
 end
