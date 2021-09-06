@@ -244,13 +244,6 @@ class VersionedTest < ActiveSupport::TestCase
     assert_equal page_versions(:welcome_1), pages(:welcome).versions.find_by_version(23)
   end
 
-  # def test_with_sequence
-  #   assert_equal 'widgets_seq', Widget.versioned_class.sequence_name
-  #   3.times { Widget.create! :name => 'new widget' }
-  #   assert_equal 3, Widget.count
-  #   assert_equal 3, Widget.versioned_class.count
-  # end
-
   def test_has_many_through
     assert_equal [authors(:caged), authors(:mly)], pages(:welcome).authors
   end

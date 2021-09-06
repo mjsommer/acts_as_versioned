@@ -81,7 +81,6 @@ module ActiveRecord #:nodoc:
       # * <tt>foreign_key</tt> - foreign key used to relate the versioned model to the original model (default: page_id in the above example)
       # * <tt>inheritance_column</tt> - name of the column to save the model's inheritance_column value for STI.  (default: versioned_type)
       # * <tt>version_column</tt> - name of the column in the model that keeps the version number (default: version)
-      # * <tt>sequence_name</tt> - name of the custom sequence to be used by the versioned model.
       # * <tt>limit</tt> - number of revisions to keep, defaults to unlimited
       # * <tt>if</tt> - symbol of method to check before saving a new version.  If this method returns false, a new version is not saved.
       #   For finer control, pass either a Proc or modify Model#version_condition_met?
@@ -169,7 +168,7 @@ module ActiveRecord #:nodoc:
         return if self.included_modules.include?(ActiveRecord::Acts::Versioned::Behaviors)
 
         cattr_accessor :versioned_class_name, :versioned_foreign_key, :versioned_table_name, :versioned_inheritance_column,
-                       :version_column, :max_version_limit, :track_altered_attributes, :version_condition, :version_sequence_name, :non_versioned_columns,
+                       :version_column, :max_version_limit, :track_altered_attributes, :version_condition, :non_versioned_columns,
                        :version_association_options, :version_if_changed, :version_except_columns
 
         self.versioned_class_name         = options[:class_name] || "Version"
@@ -177,7 +176,6 @@ module ActiveRecord #:nodoc:
         self.versioned_table_name         = options[:table_name] || "#{table_name_prefix}#{base_class.name.demodulize.underscore}_versions#{table_name_suffix}"
         self.versioned_inheritance_column = options[:inheritance_column] || "versioned_#{inheritance_column}"
         self.version_column               = options[:version_column] || 'version'
-        self.version_sequence_name        = options[:sequence_name]
         self.max_version_limit            = options[:limit].to_i
         self.version_condition            = options[:if] || true
         self.version_except_columns       = [options[:except]].flatten.map(&:to_s)  #these columns are kept in _versioned, but changing them does not excplitly cause a version change
@@ -259,7 +257,6 @@ module ActiveRecord #:nodoc:
                                    :class_name  => "::#{self.to_s}",
                                    :foreign_key => versioned_foreign_key
         versioned_class.send :include, options[:extend] if options[:extend].is_a?(Module)
-        versioned_class.set_sequence_name version_sequence_name if version_sequence_name
       end
 
       module Behaviors
