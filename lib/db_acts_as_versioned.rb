@@ -21,6 +21,9 @@
 require "db_acts_as_versioned/version"
 require 'active_support/concern'
 
+require 'active_record'
+# require 'active_support'
+
 module ActiveRecord #:nodoc:
   module Acts #:nodoc:
     # Specify this act if you want to save a copy of the row in a versioned table.  This assumes there is a
@@ -339,7 +342,7 @@ module ActiveRecord #:nodoc:
           end
 
           if orig_model.is_a?(self.class.versioned_class)
-            new_model[new_model.class.inheritance_column] = orig_model[self.class.versioned_inheritance_column]
+            new_model[new_model.class.inheritance_column] = orig_model[self.class.versioned_inheritance_column] if orig_model[self.class.versioned_inheritance_column]
           elsif new_model.is_a?(self.class.versioned_class)
             sym = self.class.versioned_inheritance_column.to_sym
             define_method new_model, sym

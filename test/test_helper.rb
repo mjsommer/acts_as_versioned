@@ -1,6 +1,8 @@
 ENV["RACK_ENV"] = "test"
 
-require "rack/test"
+puts("FOOOOOOOOOOO!!!!!!!!")
+
+# require "rack/test"
 
 require 'test/unit'
 require 'minitest/autorun'

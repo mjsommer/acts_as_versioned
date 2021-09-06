@@ -41,6 +41,8 @@ load(File.dirname(__FILE__) + "/schema.rb")
 #   ActiveRecord::Base.connection.execute "ALTER TABLE widget_versions ADD COLUMN id INTEGER PRIMARY KEY DEFAULT nextval('widgets_seq');"
 # end
 
+# require 'test_help'
+
 class ActiveSupport::TestCase #:nodoc:
   include ActiveRecord::TestFixtures
 

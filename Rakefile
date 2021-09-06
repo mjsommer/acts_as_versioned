@@ -1,6 +1,11 @@
 require "bundler/gem_tasks"
 
+# require 'active_record'
+# require 'active_support'
+
 task :default => [:test]
+
+require_relative 'test/test_helper'
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
