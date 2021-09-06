@@ -15,6 +15,9 @@ jobs:
             name: "Default"
             ruby: 2.7.4
             gemfile: Gemfile
+          -
+            ruby: 2.7.4
+            gemfile: gemfiles/Gemfile.4.2-2.7.4.gemfile
 
     env:
       BUNDLE_GEMFILE: "${{ matrix.gemfile }}"
