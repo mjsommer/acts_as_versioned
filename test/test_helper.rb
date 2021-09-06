@@ -17,6 +17,10 @@ ActiveRecord::Migration.verbose = false
 
 load(File.dirname(__FILE__) + "/schema.rb")
 
+require_relative 'models/page'
+require_relative 'models/widget'
+require_relative 'models/landmark'
+
 # require 'test_help'
 
 class ActiveSupport::TestCase #:nodoc:
