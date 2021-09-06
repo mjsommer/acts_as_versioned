@@ -21,9 +21,6 @@
 require "db_acts_as_versioned/version"
 require 'active_support/concern'
 
-require 'active_record'
-# require 'active_support'
-
 module ActiveRecord #:nodoc:
   module Acts #:nodoc:
     # Specify this act if you want to save a copy of the row in a versioned table.  This assumes there is a
