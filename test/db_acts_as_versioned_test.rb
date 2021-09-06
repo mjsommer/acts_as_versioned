@@ -75,6 +75,9 @@ class VersionedTest < ActiveSupport::TestCase
   #   assert_instance_of LockedPage.versioned_class, p.versions.first
   # end
 
+  # NOTE: Collision between acts_as_versioned :version_column => :lock_version and ActiveRecord::Base.lock_optimistically mechansim
+  # Work well when name doesn't collide, see def test_rollback_with_version_number
+
   # def test_rollback_with_version_number_with_options
   #   p = locked_pages(:welcome)
   #   assert_equal 'Welcome to the weblog', p.title
