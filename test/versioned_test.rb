@@ -1,6 +1,6 @@
 require File.expand_path '../test_helper.rb',__FILE__
 
-require_relative 'abstract_unit'
+# require_relative 'abstract_unit'
 # require File.join(File.dirname(__FILE__), 'abstract_unit')
 require_relative 'fixtures/page'
 require_relative 'fixtures/widget'
