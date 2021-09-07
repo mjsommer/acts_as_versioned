@@ -1,5 +1,0 @@
-.bundle
-.idea
-test/*.log
-pkg
-*.sqlite3.db
