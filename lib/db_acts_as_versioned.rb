@@ -256,6 +256,10 @@ module ActiveRecord #:nodoc:
         versioned_class.send :include, options[:extend] if options[:extend].is_a?(Module)
       end
 
+      def acts_as_versioned?
+        false
+      end
+
       module Behaviors
         extend ActiveSupport::Concern
 
@@ -408,6 +412,10 @@ module ActiveRecord #:nodoc:
 
 
         module ClassMethods
+          def acts_as_versioned?
+            true
+          end
+
           # Returns an array of columns that are versioned.  See non_versioned_columns
           def versioned_columns
             @versioned_columns ||= columns.select { |c| !non_versioned_columns.include?(c.name) }
