@@ -11,6 +11,12 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
     assert_equal 1, p.versions.size
     assert_equal 1, p.version
     assert_instance_of Page.versioned_class, p.versions.first
+    first_version = p.versions.first
+    assert_equal 'first title', first_version.title, "The first version should match the created object value"
+    p.update :title => 'changed'
+    assert_equal 2, p.versions.size
+    last_version = p.versions.last
+    assert_equal 'changed', last_version.title, "The last version should match the last change"
   end
 
   def test_saves_without_revision
