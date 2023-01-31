@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveRecord::Schema.define do
   create_table :pages do |t|
     t.integer :version

@@ -1,22 +1,23 @@
-require_relative 'test_helper'
+# frozen_string_literal: true
+
+require_relative "test_helper"
 
 class DbActsAsVersionedTest < ActiveSupport::TestCase
-
   fixtures :pages, :page_versions, :locked_pages, :locked_pages_revisions, :authors, :landmarks, :landmark_versions
-  set_fixture_class :page_versions => Page::Version
+  set_fixture_class page_versions: Page::Version
 
   def test_saves_versioned_copy
-    p = Page.create! :title => 'first title', :body => 'first body'
+    p = Page.create! title: "first title", body: "first body"
     assert !p.new_record?
     assert_equal 1, p.versions.size
     assert_equal 1, p.version
     assert_instance_of Page.versioned_class, p.versions.first
     first_version = p.versions.first
-    assert_equal 'first title', first_version.title, "The first version should match the created object value"
-    p.update :title => 'changed'
+    assert_equal "first title", first_version.title, "The first version should match the created object value"
+    p.update title: "changed"
     assert_equal 2, p.versions.size
     last_version = p.versions.last
-    assert_equal 'changed', last_version.title, "The last version should match the last change"
+    assert_equal "changed", last_version.title, "The last version should match the last change"
   end
 
   def test_saves_without_revision
@@ -26,7 +27,7 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
     p.save_without_revision
 
     p.without_revision do
-      p.update :title => 'changed'
+      p.update title: "changed"
     end
 
     assert_equal old_versions, p.versions.count
@@ -35,16 +36,16 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   def test_rollback_with_version_number
     p = pages(:welcome)
     assert_equal 24, p.version
-    assert_equal 'Welcome to the weblog', p.title
+    assert_equal "Welcome to the weblog", p.title
 
     assert p.revert_to!(23), "Couldn't revert to 23"
     assert_equal 23, p.version
-    assert_equal 'Welcome to the weblg', p.title
+    assert_equal "Welcome to the weblg", p.title
   end
 
   def test_versioned_class_name
-    assert_equal 'Version', Page.versioned_class_name
-    assert_equal 'LockedPageRevision', LockedPage.versioned_class_name
+    assert_equal "Version", Page.versioned_class_name
+    assert_equal "LockedPageRevision", LockedPage.versioned_class_name
   end
 
   def test_versioned_class
@@ -62,11 +63,11 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   def test_rollback_with_version_class
     p = pages(:welcome)
     assert_equal 24, p.version
-    assert_equal 'Welcome to the weblog', p.title
+    assert_equal "Welcome to the weblog", p.title
 
     assert p.revert_to!(p.versions.find_by_version(23)), "Couldn't revert to 23"
     assert_equal 23, p.version
-    assert_equal 'Welcome to the weblg', p.title
+    assert_equal "Welcome to the weblg", p.title
   end
 
   def test_rollback_fails_with_invalid_revision
@@ -85,22 +86,22 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
 
   def test_rollback_with_version_number_with_options
     p = locked_pages(:welcome)
-    assert_equal 'Welcome to the weblog', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
+    assert_equal "Welcome to the weblog", p.title
+    assert_equal "LockedPage", p.versions.first.version_type
 
     assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 23"
-    assert_equal 'Welcome to the weblg', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
+    assert_equal "Welcome to the weblg", p.title
+    assert_equal "LockedPage", p.versions.first.version_type
   end
 
   def test_rollback_with_version_class_with_options
     p = locked_pages(:welcome)
-    assert_equal 'Welcome to the weblog', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
+    assert_equal "Welcome to the weblog", p.title
+    assert_equal "LockedPage", p.versions.first.version_type
 
     assert p.revert_to!(p.versions.first), "Couldn't revert to 1"
-    assert_equal 'Welcome to the weblg', p.title
-    assert_equal 'LockedPage', p.versions.first.version_type
+    assert_equal "Welcome to the weblg", p.title
+    assert_equal "LockedPage", p.versions.first.version_type
   end
 
   # ActiveRecord::StaleObjectError: Attempted to update a stale object: LockedPage::LockedPageRevision
@@ -115,11 +116,11 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
 
   def test_rollback_with_version_number_with_sti
     p = locked_pages(:thinking)
-    assert_equal 'So I was thinking', p.title
+    assert_equal "So I was thinking", p.title
 
     assert p.revert_to!(p.versions.first.lock_version), "Couldn't revert to 1"
-    assert_equal 'So I was thinking!!!', p.title
-    assert_equal 'SpecialLockedPage', p.versions.first.version_type
+    assert_equal "So I was thinking!!!", p.title
+    assert_equal "SpecialLockedPage", p.versions.first.version_type
   end
 
   def test_lock_version_works_with_versioning
@@ -127,13 +128,13 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
     p2 = LockedPage.find(p.id)
 
     assert_raises(ActiveRecord::StaleObjectError) do
-      p2.title = 'stale title'
+      p2.title = "stale title"
       p2.save
     end
   end
 
   def test_version_if_condition
-    p = Page.create! :title => "title"
+    p = Page.create! title: "title"
     assert_equal 1, p.version
 
     Page.feeling_good = false
@@ -145,20 +146,22 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   def test_version_if_condition2
     # set new if condition
     Page.class_eval do
-      def new_feeling_good() title[0..0] == 'a'; end
+      def new_feeling_good
+        title[0..0] == "a"
+      end
       alias_method :old_feeling_good, :feeling_good?
       alias_method :feeling_good?, :new_feeling_good
     end
 
-    p = Page.create! :title => "title"
+    p = Page.create! title: "title"
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update(:title => 'new title')
+    p.update(title: "new title")
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update(:title => 'a title')
+    p.update(title: "a title")
     assert_equal 2, p.version
     assert_equal 2, p.versions.count
 
@@ -169,17 +172,17 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   def test_version_if_condition_with_block
     # set new if condition
     old_condition = Page.version_condition
-    Page.version_condition = Proc.new { |page| page.title[0..0] == 'b' }
+    Page.version_condition = proc { |page| page.title[0..0] == "b" }
 
-    p = Page.create! :title => "title"
+    p = Page.create! title: "title"
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update(:title => 'a title')
+    p.update(title: "a title")
     assert_equal 1, p.version # version does not increment
     assert_equal 1, p.versions.count
 
-    p.update(:title => 'b title')
+    p.update(title: "b title")
     assert_equal 2, p.version
     assert_equal 2, p.versions.count
 
@@ -188,14 +191,14 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   end
 
   def test_version_no_limit
-    p = Page.create! :title => "title", :body => 'first body'
+    p = Page.create! title: "title", body: "first body"
     p.save
     p.save
     5.times do |i|
       p.title = "title#{i}"
       p.save
       assert_equal "title#{i}", p.title
-      assert_equal (i+2), p.version
+      assert_equal (i + 2), p.version
     end
   end
 
@@ -247,7 +250,7 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   # end
 
   def test_find_versions
-    assert_equal 1, locked_pages(:welcome).versions.where('title LIKE ?', '%weblog%').count
+    assert_equal 1, locked_pages(:welcome).versions.where("title LIKE ?", "%weblog%").count
   end
 
   def test_find_version
@@ -276,9 +279,9 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
     association = Widget.reflect_on_association(:versions)
     options = association.options
     assert_equal :nullify, options[:dependent]
-    assert_equal 'widget_id', options[:foreign_key]
+    assert_equal "widget_id", options[:foreign_key]
 
-    widget = Widget.create! :name => 'new widget'
+    widget = Widget.create! name: "new widget"
     assert_equal 1, Widget.count
     assert_equal 1, Widget.versioned_class.count
     widget.destroy
@@ -298,7 +301,9 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   end
 
   def test_unchanged_string_attributes
-    landmarks(:washington).attributes = landmarks(:washington).attributes.except("id").inject({}) { |params, (key, value)| params.update(key => value.to_s) }
+    landmarks(:washington).attributes = landmarks(:washington).attributes.except("id").inject({}) do |params, (key, value)|
+      params.update(key => value.to_s)
+    end
     assert !landmarks(:washington).changed?
   end
 
@@ -363,7 +368,7 @@ class DbActsAsVersionedTest < ActiveSupport::TestCase
   def test_without_locking_reverts_optimistic_locking_settings_if_block_raises_exception
     assert_raises(RuntimeError) do
       LockedPage.without_locking do
-        raise RuntimeError, "oh noes"
+        raise "oh noes"
       end
     end
     assert ActiveRecord::Base.lock_optimistically
